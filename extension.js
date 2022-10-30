@@ -2,8 +2,8 @@ const Main = imports.ui.main;
 const Lang = imports.lang;
 const Meta = imports.gi.Meta;
 const Shell = imports.gi.Shell;
-
-const APP = "re.sonny.Tangram.desktop";
+const GLib = imports.gi.GLib;
+const ExtensionUtils = imports.misc.extensionUtils;
 
 // Ported from https://superuser.com/questions/471606/gnome-shell-extension-key-binding/1182899#1182899
 class KeyManager {
@@ -51,17 +51,43 @@ class Extension {
   }
 
   enable() {
+    const settings = ExtensionUtils.getSettings(
+      "org.gnome.shell.extensions.com.pojtinger.felicitas.gnome-shell-extension-sticky-app"
+    );
+
+    const toggleShortcut = settings.get_string("toggle-shortcut");
+    const appId = settings.get_string("app-id");
+
+    console.log("Toggling app with ID", appId, "and shortcut", toggleShortcut);
+
     let keyManager = new KeyManager();
-    keyManager.listenFor("<super>u", function () {
-      console.log("Toggling app with ID " + APP);
+    keyManager.listenFor(toggleShortcut, function () {
+      const openApp = () => {
+        this.app = Shell.AppSystem.get_default().lookup_app(appId);
+        this.app.open_new_window(-1);
+      };
 
-      // Shell.AppSystem.get_default()
-      //   .get_installed()
-      //   .forEach((app) => console.log(app.get_id()));
+      if (!this.app) {
+        openApp();
 
-      const app = Shell.AppSystem.get_default().lookup_app(APP);
+        GLib.usleep(1000);
+      }
 
-      app.open_new_window(-1);
+      let window = this.app.get_windows()[0];
+      if (!window) {
+        this.app.open_new_window(-1);
+
+        GLib.usleep(1000);
+
+        window = this.app.get_windows()[0];
+      }
+
+      if (window.minimized) {
+        window.unminimize();
+        window.activate(global.get_current_time());
+      } else {
+        window.minimize();
+      }
     });
   }
 

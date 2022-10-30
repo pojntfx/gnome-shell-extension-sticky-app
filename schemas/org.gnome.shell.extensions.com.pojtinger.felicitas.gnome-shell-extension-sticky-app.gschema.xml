@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+    <schema id="org.gnome.shell.extensions.com.pojtinger.felicitas.gnome-shell-extension-sticky-app" path="/org/gnome/shell/extensions/example/">
+        <key name="toggle-shortcut" type="s">
+            <default>
+                <![CDATA["<super>u"]]>
+            </default>
+        </key>
+
+        <key name="app-id" type="s">
+            <default>"re.sonny.Tangram.desktop"</default>
+        </key>
+    </schema>
+</schemalist>

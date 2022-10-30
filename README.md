@@ -4,6 +4,8 @@ A GNOME shell extension to toggle an app's visibility.
 
 ## Overview
 
+Also install https://extensions.gnome.org/extension/2639/hide-minimized/ to hide the minimized app from the overview.
+
 🚧 This project is a work-in-progress! Instructions will be added as soon as it is usable. 🚧
 
 ## License
