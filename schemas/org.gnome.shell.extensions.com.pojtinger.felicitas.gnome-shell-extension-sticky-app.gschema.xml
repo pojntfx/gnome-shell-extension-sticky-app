@@ -8,7 +8,7 @@
         </key>
 
         <key name="app-id" type="s">
-            <default>"re.sonny.Tangram.desktop"</default>
+            <default>"org.gnome.Terminal.desktop"</default>
         </key>
     </schema>
 </schemalist>
