@@ -1,0 +1,6 @@
+{
+  "name": "Sticky App",
+  "description": "A GNOME shell extension to toggle an app's visibility.",
+  "uuid": "gnome-shell-extension-sticky-app@felicitas.pojtinger.com",
+  "shell-version": ["42"]
+}
